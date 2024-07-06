@@ -44,9 +44,11 @@ public class PortDetailServiceImpl implements PortDetailService {
         portDetails.setStock(stock);
         portDetails.setQuantity_lot(portDetails.getQuantity_lot());
         portDetails.setPrice(stock.getPrice());
-
-        user.setBalance(user.getBalance());
-
+        user.setBalance(user.getBalance()- stock.getPrice());
+        port.setTotal_amount(user.getBalance() - stock.getPrice());
+        if (user.getBalance() < 0) {
+            throw new RuntimeException("Oops balance tidak cukup");
+        }
         portofolioService.update(port.getId(),port);
 
         return portDetailRepository.save(portDetails);
