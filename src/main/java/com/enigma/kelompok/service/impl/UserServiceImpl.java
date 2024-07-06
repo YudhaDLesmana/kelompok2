@@ -18,8 +18,8 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public Page<User> getAll(String username, Pageable pageable) {
-        Specification<User> specification = UserSpecification.getSpecification(username);
+    public Page<User> getAll(String username, Integer balance, Pageable pageable) {
+        Specification<User> specification = UserSpecification.getSpecification(username, balance);
         return userRepository.findAll(specification, pageable);
     }
 

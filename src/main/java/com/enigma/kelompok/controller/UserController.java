@@ -31,9 +31,10 @@ public class UserController {
     @GetMapping
     public ResponseEntity<?> getAll(
             @RequestParam(required = false) String username,
+            @RequestParam(required = false) Integer balance,
             @PageableDefault(page = 0, size = 10)Pageable pageable
             ) {
-        Page<User> res = userService.getAll(username, pageable);
+        Page<User> res = userService.getAll(username, balance, pageable);
         PageWrapper<User> result = new PageWrapper<>(res);
         return Res.renderJson(
                 result,

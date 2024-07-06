@@ -4,6 +4,8 @@ package com.enigma.kelompok.service.impl;
 import com.enigma.kelompok.model.Stock;
 import com.enigma.kelompok.repository.StockRepository;
 import com.enigma.kelompok.service.StockService;
+import com.enigma.kelompok.utils.specification.StockSpecification;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,8 +21,9 @@ public StockServiceImpl(StockRepository stockRepo){
 
 //Bagian getAll
     @Override
-    public List<Stock> getAll() {
-        return stockRepo.findAll();
+    public List<Stock> getAll(String name, String code, Integer price) {
+        Specification<Stock> specification = StockSpecification.getStockSpecification(name, code, price);
+    return stockRepo.findAll(specification);
     }
 
     //Bagian getOne
