@@ -31,8 +31,8 @@ public class UserController {
     @GetMapping
     public ResponseEntity<?> getAll(
             @RequestParam(required = false) String username,
-            @PageableDefault(page = 0, size = 10)Pageable pageable
-            ) {
+            @PageableDefault(page = 0, size = 10) Pageable pageable
+    ) {
         Page<User> res = userService.getAll(username, pageable);
         PageWrapper<User> result = new PageWrapper<>(res);
         return Res.renderJson(
@@ -51,4 +51,13 @@ public class UserController {
         );
     }
 
+    @PutMapping("/{id}")
+    public User update(@PathVariable Integer id, User request) {
+        return userService.update(id, request);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Integer id) {
+        userService.delete(id);
+    }
 }
