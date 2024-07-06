@@ -18,10 +18,9 @@ public class StockServiceImpl implements StockService {
 
     private final StockRepository stockRepository;
 
-
     @Override
-    public Page<Stock> getAll(String name, Pageable pageable) {
-        Specification<Stock> specification = StockSpecification.getStockSpecification(name);
+    public Page<Stock> getAll(String name, String code, Integer price, Pageable pageable) {
+        Specification<Stock> specification = StockSpecification.getStockSpecification(name, code, price);
         return stockRepository.findAll(specification, pageable);
     }
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface StockService {
 
-    Page<Stock> getAll(String name, Pageable pageable);
+    Page<Stock> getAll(String name, String code, Integer price, Pageable pageable);
 
     Stock getOne(Integer id);
     Stock create(Stock req);

@@ -16,24 +16,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/stocks")
 @RequiredArgsConstructor
 public class StockController {
-
     private final StockService stockService;
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody Stock request) {
-        return Res.renderJson(
-                stockService.create(request),
-                "Created",
-                HttpStatus.CREATED
-        );
+    public Stock create(@RequestBody Stock stock) {
+        return stockService.create(stock);
     }
 
     @GetMapping
     public ResponseEntity<?> getAll(
             @RequestParam(required = false) String name,
-            @PageableDefault(page = 0, size = 10)Pageable pageable
-            ) {
-        Page<Stock> res = stockService.getAll(name, pageable);
+            @RequestParam(required = false) Integer price,
+            @PageableDefault(page = 0, size = 10) Pageable pageable
+    ) {
+        Page<Stock> res = stockService.getAll(name, price, pageable);
         PageWrapper<Stock> result = new PageWrapper<>(res);
         return Res.renderJson(
                 result,
@@ -43,22 +39,17 @@ public class StockController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getOne(@PathVariable Integer id) {
-        return Res.renderJson(
-                stockService.getOne(id),
-                "Found a user",
-                HttpStatus.OK
-        );
+    public Stock getOne(@PathVariable Integer id) {
+        return stockService.getOne(id);
     }
 
     @PutMapping("/{id}")
-    public Stock update(@PathVariable Integer id, Stock request){
-        return stockService.update(id, request);
+    public Stock update(@PathVariable Integer id, @RequestBody Stock stock) {
+        return stockService.update(id, stock);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id){
+    public void delete(@PathVariable Integer id) {
         stockService.delete(id);
     }
-
 }

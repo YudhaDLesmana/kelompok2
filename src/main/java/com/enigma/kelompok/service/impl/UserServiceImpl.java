@@ -3,7 +3,6 @@ package com.enigma.kelompok.service.impl;
 import com.enigma.kelompok.model.User;
 import com.enigma.kelompok.repository.UserRepository;
 import com.enigma.kelompok.service.UserService;
-
 import com.enigma.kelompok.utils.specification.UserSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,8 +17,8 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public Page<User> getAll(String username, Pageable pageable) {
-        Specification<User> specification = UserSpecification.getSpecification(username);
+    public Page<User> getAll(String username, String password, Integer balance, Pageable pageable) {
+        Specification<User> specification = UserSpecification.getSpecification(username, password, balance);
         return userRepository.findAll(specification, pageable);
     }
 

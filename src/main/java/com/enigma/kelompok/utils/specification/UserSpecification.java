@@ -10,7 +10,7 @@ import java.util.List;
 public class UserSpecification {
 
     public static Specification<User> getSpecification(
-            String username, Integer balance
+            String username, String password, Integer balance
     ) {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
