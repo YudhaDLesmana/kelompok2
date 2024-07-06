@@ -10,6 +10,6 @@ import com.enigma.kelompok.model.Portofolio;
 @Repository
 
 public interface PortofolioRepository extends JpaRepository<Portofolio, Integer> {
-    Page<Portofolio> findAll(Integer totalAmount, Pageable pageable);
+
 
 }

@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PortofolioServiceImpl implements PortofolioService {
@@ -16,7 +18,7 @@ public class PortofolioServiceImpl implements PortofolioService {
 
     @Override
     public Page<Portofolio> getAll(Integer totalAmount,Pageable pageable) {
-        return portofolioRepository.findAll(totalAmount,pageable);
+        return portofolioRepository.findAll(pageable);
     }
 
     @Override
