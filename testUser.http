@@ -1,0 +1,45 @@
+### create customers
+POST http://localhost:8181/users
+Content-Type: application/json
+
+{
+  "username": "joko",
+  "password": "1234",
+  "balance": 200000,
+  "role": "ROLE_ADMIN"
+}
+
+### buy course
+POST http://localhost:8080/customers/buy
+Content-Type: application/json
+
+{
+  "customer_id": 30,
+  "course_id": 1
+}
+
+### getAll customers
+GET http://localhost:8181/users
+Accept: application/json
+Content-Type: application/json
+
+### get customers with parameter
+GET http://localhost:8181/users?username=b
+Accept: application/json
+Content-Type: application/json
+
+### getOne customers
+GET http://localhost:8080/users/1
+Accept: application/json
+Content-Type: application/json
+
+### update customers
+PUT http://localhost:8080/users/1
+Content-Type: application/json
+
+{
+  "role": "ROLE_ADMIN"
+}
+
+### delete customers
+DELETE http://localhost:8080/users/1

@@ -9,14 +9,26 @@ import java.util.List;
 
 public class UserSpecification {
 
-    public static Specification<User> getSpecification(
-            String username
-    ) {
+    public static Specification<User> hasUsername(String username) {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.like(root.get("username"), "%" + username + "%");
+    }
+
+    public static Specification hasBalance(Integer balance) {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.equal(root.get("balance"), balance);
+    }
+
+    public static Specification<User> getUserSpecification(String username, Integer balance) {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-            if (username != null && !username.isEmpty()) {
+            if (username != null && !username.equals("")) {
                 predicates.add(criteriaBuilder.like(root.get("username"), "%" + username + "%"));
+            }
+
+            if (balance != null) {
+                predicates.add(criteriaBuilder.equal(root.get("balance"), balance));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
