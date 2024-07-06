@@ -64,7 +64,9 @@ public class PortfolioServiceImpl implements PortfolioService {
     }
 
     @Override
-    public void delete(Integer id) {
+    public Portfolio update(Integer id, PortfolioRequestDTO request) {
+        Portfolio updatePort = this.getOne(id);
 
+        return null;
     }
 }

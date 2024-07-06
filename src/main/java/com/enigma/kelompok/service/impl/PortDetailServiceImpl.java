@@ -21,15 +21,9 @@ public class PortDetailServiceImpl implements PortDetailService {
     }
 
     @Override
-    public void delete(Integer id) {
-
-    }
-
-    @Override
     public Page<PortDetail> getAll(Pageable pageable) {
         return portDetailRepository.findAll(pageable);
     }
-
 
     @Override
     public PortDetail getOne(Integer id) {

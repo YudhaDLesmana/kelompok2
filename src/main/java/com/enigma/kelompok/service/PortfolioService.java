@@ -7,11 +7,8 @@ import org.springframework.data.domain.Pageable;
 import com.enigma.kelompok.model.Portfolio;
 
 public interface PortfolioService {
-  Page<Portfolio> getAll(Pageable pageable);
-
-  Portfolio getOne(Integer id);
-
   Portfolio create(PortfolioRequestDTO request);
-
-  void delete(Integer id);
+  Page<Portfolio> getAll(Pageable pageable);
+  Portfolio getOne(Integer id);
+  Portfolio update(Integer id, PortfolioRequestDTO request);
 }
