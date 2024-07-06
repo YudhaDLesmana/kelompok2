@@ -1,7 +1,6 @@
 package com.enigma.kelompok.utils.specification;
 
 import com.enigma.kelompok.model.Stock;
-import com.enigma.kelompok.utils.DTO.StockDTO;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 
