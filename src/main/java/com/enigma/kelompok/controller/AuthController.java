@@ -1,12 +1,5 @@
-package com.enigma.kelompok.controller;
+package speedrun.customer.controller;
 
-
-import com.enigma.kelompok.model.Role;
-import com.enigma.kelompok.model.User;
-import com.enigma.kelompok.repository.UserRepository;
-import com.enigma.kelompok.security.JwtTokenProvider;
-import com.enigma.kelompok.utils.dto.UserDTO;
-import com.enigma.kelompok.utils.response.Res;
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -20,19 +13,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.enigma.kelompok.model.Role;
+import com.enigma.kelompok.model.User;
+import com.enigma.kelompok.repository.UserRepository;
+import com.enigma.kelompok.security.JwtTokenProvider;
+import com.enigma.kelompok.utils.dto.UserDTO;
+import com.enigma.kelompok.utils.response.Res;
 
+import javax.swing.text.html.Option;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
-
 public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider tokenProvider;
+
 
     public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository, PasswordEncoder passwordEncoder, JwtTokenProvider tokenProvider) {
         this.authenticationManager = authenticationManager;
@@ -54,10 +54,9 @@ public class AuthController {
         if (newUser.getRole() == null) {
             newUser.setRole(Role.ROLE_USER);
         }
-
         return Res.renderJson(
                 userRepository.save(newUser),
-                "Succesfully Registered",
+                "Successfully Registered!",
                 HttpStatus.CREATED
         );
     }
@@ -79,19 +78,18 @@ public class AuthController {
 
         return Res.renderJson(
                 response,
-                "Login Succesfull!",
+                "Login Sucessfull!",
                 HttpStatus.OK
         );
-
     }
 
     @PostConstruct
-    public void initAdmin(){
+    public void initAdmin() {
         String username = "admin";
         String password = "admin";
 
         Optional<User> optionalUserCredential = userRepository.findByUsername(username);
-        if (optionalUserCredential.isPresent()){
+        if(optionalUserCredential.isPresent()) {
             return;
         }
 
