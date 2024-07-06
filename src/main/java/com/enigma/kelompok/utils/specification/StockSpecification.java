@@ -22,12 +22,29 @@ public class StockSpecification {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-            if (name != null && !name.equals("")) {
+            if (name != null && !name.isEmpty()) {
                 predicates.add(criteriaBuilder.like(root.get("name"), "%" + name + "%"));
             }
 
-            if (price != null) {
-                predicates.add(criteriaBuilder.equal(root.get("price"), price));
+            if (price != null && price > 0) {
+                Predicate pricePredicate;
+                if (price <= 1000) {
+                    pricePredicate = criteriaBuilder.lessThanOrEqualTo(
+                            root.get("price"), 1000);
+                } else if (price <= 3000) {
+                    pricePredicate = criteriaBuilder.lessThanOrEqualTo(
+                            root.get("price"), 3000);
+                } else if (price <= 5000) {
+                    pricePredicate = criteriaBuilder.lessThanOrEqualTo(
+                            root.get("price"), 5000);
+                } else if (price <= 10000) {
+                    pricePredicate = criteriaBuilder.lessThanOrEqualTo(
+                            root.get("price"), 10000);
+                } else {
+                    pricePredicate = criteriaBuilder.lessThanOrEqualTo(
+                            root.get("price"), price);
+                }
+                predicates.add(pricePredicate);
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));

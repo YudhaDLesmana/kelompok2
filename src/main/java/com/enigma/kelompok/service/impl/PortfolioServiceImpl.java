@@ -36,7 +36,7 @@ public class PortfolioServiceImpl implements PortfolioService {
         if (userBalance >= totalAmount){
             Portfolio portfolio = new Portfolio();
             portfolio.setUser(user);
-            portfolio.setTotal_amount(request.getTotal_amount());
+            portfolio.setTotal_amount(totalAmount);
             portfolioRepository.save(portfolio);
 
             PortDetail portDetail = new PortDetail();
