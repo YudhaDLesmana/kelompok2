@@ -25,7 +25,7 @@ public class JwtTokenProvider {
 
   private final Key key;
 
-  public JwtTokenProvider(String jwtSecret) {
+  public JwtTokenProvider(@Value("${app.jwtSecret}") String jwtSecret) {
     this.key = Keys.hmacShaKeyFor(jwtSecret.getBytes());
   }
 
