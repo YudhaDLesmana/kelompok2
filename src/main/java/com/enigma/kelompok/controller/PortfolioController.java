@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/portfolio")
 @RequiredArgsConstructor
 
-    public class PortfolioController {
+public class PortfolioController {
+
     private final PortfolioService portfolioService;
 
     @PostMapping

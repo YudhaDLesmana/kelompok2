@@ -7,6 +7,6 @@ import com.enigma.kelompok.model.Portfolio;
 
 @Repository
 
-public interface PortofolioRepository extends JpaRepository<Portfolio, Integer> {
+public interface PortfolioRepository extends JpaRepository<Portfolio, Integer> {
 
 }
