@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import com.enigma.kelompok.model.Portofolio;
 
 public interface PortofolioService {
-  Page<Portofolio> getAll(Pageable pageable);
+  Page<Portofolio> getAll(Integer totalAmount,Pageable pageable);
 
   Portofolio getOne(Integer id);
 

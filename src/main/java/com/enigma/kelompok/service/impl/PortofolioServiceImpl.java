@@ -15,8 +15,8 @@ public class PortofolioServiceImpl implements PortofolioService {
     private final PortofolioRepository portofolioRepository;
 
     @Override
-    public Page<Portofolio> getAll(Pageable pageable) {
-        return portofolioRepository.findAll(pageable);
+    public Page<Portofolio> getAll(Integer totalAmount,Pageable pageable) {
+        return portofolioRepository.findAll(totalAmount,pageable);
     }
 
     @Override
