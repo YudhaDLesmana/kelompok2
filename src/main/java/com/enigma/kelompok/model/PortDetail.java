@@ -25,7 +25,7 @@ public class PortDetail {
 
   @ManyToOne
   @JoinColumn(name = "portofolio_id")
-  private Portofolio portofolio;
+  private Portfolio portofolio;
 
   @ManyToOne
   @JoinColumn(name = "stock_id")

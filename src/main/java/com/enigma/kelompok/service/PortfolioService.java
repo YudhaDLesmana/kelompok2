@@ -1,16 +1,17 @@
 package com.enigma.kelompok.service;
 
+import com.enigma.kelompok.utils.dto.PortfolioRequestDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.enigma.kelompok.model.Portofolio;
+import com.enigma.kelompok.model.Portfolio;
 
-public interface PortofolioService {
-  Page<Portofolio> getAll(String name, Pageable pageable);
+public interface PortfolioService {
+  Page<Portfolio> getAll(Pageable pageable);
 
-  Portofolio getOne(Integer id);
+  Portfolio getOne(Integer id);
 
-  Portofolio create(Portofolio request);
+  Portfolio create(PortfolioRequestDTO request);
 
   void delete(Integer id);
 }
