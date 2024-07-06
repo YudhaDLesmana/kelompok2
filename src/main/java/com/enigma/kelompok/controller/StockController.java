@@ -26,10 +26,11 @@ public class StockController {
     @GetMapping
     public ResponseEntity<?> getAll(
             @RequestParam(required = false) String name,
+            @RequestParam(required = false) String code,
             @RequestParam(required = false) Integer price,
             @PageableDefault(page = 0, size = 10) Pageable pageable
     ) {
-        Page<Stock> res = stockService.getAll(name, price, pageable);
+        Page<Stock> res = stockService.getAll(name, code, price, pageable);
         PageWrapper<Stock> result = new PageWrapper<>(res);
         return Res.renderJson(
                 result,
