@@ -1,4 +1,4 @@
-package speedrun.customer.security;
+package com.enigma.kelompok.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -31,7 +31,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String jwt = getJwtFromRequest(request);
 
             if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)){
-                String username = tokenProvider.getUsernameFromJWT(jwt);
+                String username = tokenProvider.getUsernameFromJwt(jwt);
 
                 UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
