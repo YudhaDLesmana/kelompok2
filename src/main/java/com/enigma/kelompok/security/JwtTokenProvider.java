@@ -16,53 +16,50 @@ import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JwtTokenProvider {
-
   @Value("${app.jwtSecret}")
   private String jwtSecret;
-
   @Value("${app.jwtExpirationInMs}")
   private Long jwtExpirationInMs;
-
   private final Key key;
 
-  public JwtTokenProvider(String jwtSecret) {
+  public JwtTokenProvider(@Value("${app.jwtSecret}") String jwtSecret) {
     this.key = Keys.hmacShaKeyFor(jwtSecret.getBytes());
   }
 
   public String generateToken(Authentication auth) {
     String username = auth.getName();
     String roles = auth.getAuthorities().stream()
-        .map(GrantedAuthority::getAuthority)
-        .collect(Collectors.joining(","));
+            .map(GrantedAuthority::getAuthority)
+            .collect(Collectors.joining(","));
 
     Date now = new Date();
     Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
 
     return Jwts.builder()
-        .setSubject(username)
-        .claim("roles", roles)
-        .setIssuedAt(new Date())
-        .setExpiration(expiryDate)
-        .signWith(key)
-        .compact();
+            .setSubject(username)
+            .claim("roles", roles)
+            .setIssuedAt(new Date())
+            .setExpiration(expiryDate)
+            .signWith(key)
+            .compact();
   }
 
-  public String getUsernameFromJwt(String token) {
+  public String getUsernameFromJWT(String token) {
     Claims claims = Jwts.parserBuilder()
-        .setSigningKey(key)
-        .build()
-        .parseClaimsJws(token)
-        .getBody();
+            .setSigningKey(key)
+            .build()
+            .parseClaimsJws(token)
+            .getBody();
 
     return claims.getSubject();
   }
 
-  public String getRolesFromJwt(String token) {
+  public String getRolesFromJWT(String token) {
     Claims claims = Jwts.parserBuilder()
-        .setSigningKey(key)
-        .build()
-        .parseClaimsJws(token)
-        .getBody();
+            .setSigningKey(key)
+            .build()
+            .parseClaimsJws(token)
+            .getBody();
 
     return (String) claims.get("roles");
   }
