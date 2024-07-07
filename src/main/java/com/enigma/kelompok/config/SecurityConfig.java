@@ -40,6 +40,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/stocks/{id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/stocks/{id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/stocks/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/port_detail").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

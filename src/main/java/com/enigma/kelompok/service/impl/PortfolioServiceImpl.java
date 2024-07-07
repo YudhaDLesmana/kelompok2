@@ -17,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Objects;
+
 @Service
 @RequiredArgsConstructor
 public class PortfolioServiceImpl implements PortfolioService {
@@ -26,14 +28,14 @@ public class PortfolioServiceImpl implements PortfolioService {
     private final PortDetailService portDetailService;
 
     @Override
-    public Portfolio create(PortfolioRequestDTO request) {
+    public Portfolio create(Integer id, PortfolioRequestDTO request) {
         User user = userService.getOne(request.getUser_id());
         Integer userBalance = user.getBalance();
 
         Stock stock = stockService.getOne(request.getStock_id());
         Integer totalAmount = stock.getPrice() * request.getQuantity_lot();
 
-        if (userBalance >= totalAmount){
+        if (userBalance >= totalAmount && checkValidateUser(user, id)){
             Portfolio portfolio = new Portfolio();
             portfolio.setUser(user);
             portfolio.setTotal_amount(totalAmount);
@@ -53,6 +55,10 @@ public class PortfolioServiceImpl implements PortfolioService {
         throw new ResponseStatusException(HttpStatus.FORBIDDEN);
     }
 
+    private boolean checkValidateUser(User user, Integer id){
+        return Objects.equals(id, user.getId());
+    }
+
     @Override
     public Page<Portfolio> getAll(Pageable pageable) {
         return portfolioRepository.findAll(pageable);
@@ -60,7 +66,7 @@ public class PortfolioServiceImpl implements PortfolioService {
 
     @Override
     public Portfolio getOne(Integer id) {
-        return portfolioRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Portofolio not found"));
+        return portfolioRepository.findByUserId(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Portofolio not found"));
     }
 
     @Override

@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "port_detail")
+@Table(name = "port_details")
 public class PortDetail {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

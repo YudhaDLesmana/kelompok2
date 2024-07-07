@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import com.enigma.kelompok.model.Portfolio;
 
 public interface PortfolioService {
-  Portfolio create(PortfolioRequestDTO request);
+  Portfolio create(Integer id, PortfolioRequestDTO request);
   Page<Portfolio> getAll(Pageable pageable);
   Portfolio getOne(Integer id);
   Portfolio update(Integer id, PortfolioRequestDTO request);
