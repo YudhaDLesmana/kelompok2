@@ -22,15 +22,19 @@ public class PortfolioController {
     private final PortfolioService portfolioService;
 
     @PostMapping("/{id}")
-    public Portfolio create(
+    public ResponseEntity<?> create(
             @PathVariable Integer id,
             @RequestBody PortfolioRequestDTO portfolio
     ) {
-        return portfolioService.create(id, portfolio);
+        return Res.renderJson(
+                portfolioService.create(id, portfolio),
+                "CREATED",
+                HttpStatus.CREATED
+        );
     }
 
     @GetMapping
-    ResponseEntity<?> getAll(
+    public ResponseEntity<?> getAll(
             @PageableDefault(page = 0, size = 10) Pageable pageable
     ) {
         Page<Portfolio> res = portfolioService.getAll(pageable);
@@ -43,7 +47,11 @@ public class PortfolioController {
     }
 
     @GetMapping("/{id}")
-    public Portfolio getOne(@PathVariable Integer id) {
-        return portfolioService.getOne(id);
+    public ResponseEntity<?> getOne(@PathVariable Integer id) {
+        return Res.renderJson(
+                portfolioService.getOne(id),
+                "FOUND A PORTFOLIO",
+                HttpStatus.OK
+        );
     }
 }

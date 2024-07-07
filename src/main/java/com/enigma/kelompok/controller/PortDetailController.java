@@ -35,7 +35,11 @@ public class PortDetailController {
     }
 
     @GetMapping("/{id}")
-    public PortDetail getOne(@PathVariable Integer id) {
-        return portDetailService.getOne(id);
+    public ResponseEntity<?> getOne(@PathVariable Integer id) {
+        return Res.renderJson(
+                portDetailService.getOne(id),
+                "FOUND A PORTFOLIO DETAIL",
+                HttpStatus.OK
+        );
     }
 }

@@ -23,7 +23,7 @@ public class UserController {
     public ResponseEntity<?> create(@RequestBody User request) {
         return Res.renderJson(
                 userService.create(request),
-                "Created",
+                "CREATED",
                 HttpStatus.CREATED
         );
     }
@@ -47,9 +47,22 @@ public class UserController {
     public ResponseEntity<?> getOne(@PathVariable Integer id) {
         return Res.renderJson(
                 userService.getOne(id),
-                "Found a user",
+                "FOUND A USER",
                 HttpStatus.OK
         );
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody User user) {
+        return Res.renderJson(
+                userService.update(id, user),
+                "USER IS UPDATED",
+                HttpStatus.OK
+        );
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Integer id) {
+        userService.delete(id);
+    }
 }

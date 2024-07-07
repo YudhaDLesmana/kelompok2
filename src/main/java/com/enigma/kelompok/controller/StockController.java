@@ -19,8 +19,12 @@ public class StockController {
     private final StockService stockService;
 
     @PostMapping
-    public Stock create(@RequestBody Stock stock) {
-        return stockService.create(stock);
+    public ResponseEntity<?> create(@RequestBody Stock stock) {
+        return Res.renderJson(
+                stockService.create(stock),
+                "CREATED",
+                HttpStatus.CREATED
+        );
     }
 
     @GetMapping
@@ -39,13 +43,21 @@ public class StockController {
     }
 
     @GetMapping("/{id}")
-    public Stock getOne(@PathVariable Integer id) {
-        return stockService.getOne(id);
+    public ResponseEntity<?> getOne(@PathVariable Integer id) {
+        return Res.renderJson(
+                stockService.getOne(id),
+                "FOUND A STOCK",
+                HttpStatus.OK
+        );
     }
 
     @PutMapping("/{id}")
-    public Stock update(@PathVariable Integer id, @RequestBody Stock stock) {
-        return stockService.update(id, stock);
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Stock stock) {
+        return Res.renderJson(
+                stockService.update(id, stock),
+                "STOCK IS UPDATED",
+                HttpStatus.OK
+        );
     }
 
     @DeleteMapping("/{id}")
