@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "portofolios")
-public class Portofolio {
+public class Portfolio {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;

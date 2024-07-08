@@ -1,6 +1,6 @@
 package com.enigma.kelompok.service;
 
-import com.enigma.kelompok.utils.DTO.PortDetailDTO;
+import com.enigma.kelompok.utils.dto.PortDetailDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,4 +14,7 @@ public interface PortDetailService {
   PortDetail create(PortDetailDTO request);
 
   void delete(Integer id);
+
+  PortDetail create(PortDetail request);
+
 }

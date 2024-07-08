@@ -1,0 +1,14 @@
+### create customers
+POST http://localhost:8383/portfolio
+Content-Type: application/json
+
+{
+  "user_id": 2,
+  "stock_id": 1,
+  "quantity_lot": 2
+}
+
+### getAll customers
+GET http://localhost:8383/portfolio
+Accept: application/json
+Content-Type: application/json

@@ -1,7 +1,7 @@
 package com.enigma.kelompok.controller;
 
-import com.enigma.kelompok.model.User;
-import com.enigma.kelompok.service.UserService;
+import com.enigma.kelompok.model.Stock;
+import com.enigma.kelompok.service.StockService;
 import com.enigma.kelompok.utils.response.PageWrapper;
 import com.enigma.kelompok.utils.response.Res;
 import lombok.RequiredArgsConstructor;
@@ -13,16 +13,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/stocks")
 @RequiredArgsConstructor
-public class UserController {
-
-    private final UserService userService;
+public class StockController {
+    private final StockService stockService;
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody User request) {
+    public ResponseEntity<?> create(@RequestBody Stock stock) {
         return Res.renderJson(
-                userService.create(request),
+                stockService.create(stock),
                 "CREATED",
                 HttpStatus.CREATED
         );
@@ -30,12 +29,12 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<?> getAll(
-            @RequestParam(required = false) String username,
-            @RequestParam(required = false) Integer balance,
-            @PageableDefault(page = 0, size = 10)Pageable pageable
-            ) {
-        Page<User> res = userService.getAll(username, balance, pageable);
-        PageWrapper<User> result = new PageWrapper<>(res);
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Integer price,
+            @PageableDefault(page = 0, size = 10) Pageable pageable
+    ) {
+        Page<Stock> res = stockService.getAll(name, price, pageable);
+        PageWrapper<Stock> result = new PageWrapper<>(res);
         return Res.renderJson(
                 result,
                 "FOUND",
@@ -46,23 +45,23 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getOne(@PathVariable Integer id) {
         return Res.renderJson(
-                userService.getOne(id),
-                "FOUND A USER",
+                stockService.getOne(id),
+                "FOUND A STOCK",
                 HttpStatus.OK
         );
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody User user) {
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Stock stock) {
         return Res.renderJson(
-                userService.update(id, user),
-                "USER IS UPDATED",
+                stockService.update(id, stock),
+                "STOCK IS UPDATED",
                 HttpStatus.OK
         );
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
-        userService.delete(id);
+        stockService.delete(id);
     }
 }

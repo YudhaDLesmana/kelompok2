@@ -1,0 +1,15 @@
+branch feature
+
+ROLE USER
+->register
+->login
+->get by user_id -> hanya bisa getOne
+->update
+->delete
+->create transaction -> menggunakan user_id di endpoint nya
+->get transaction by user_id -> hanya bisa getOne menggunakan user_id
+->get transaction detail by id -> hanya bisa getOne menggunakan user_id
+
+ROLE ADMIN => bisa akses semua feature
+
+AuthController sudah dibuat service dan serviceImpl nya jadi di controller hanya memangil service nya saja

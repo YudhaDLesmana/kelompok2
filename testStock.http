@@ -1,0 +1,46 @@
+### create customers
+POST http://localhost:8282/stocks
+Content-Type: application/json
+
+{
+  "name": "test",
+  "code": "1234",
+  "price": 1000
+}
+
+### buy course
+POST http://localhost:8282/stocks/buy
+Content-Type: application/json
+
+{
+  "customer_id": 30,
+  "course_id": 1
+}
+
+### getAll customers
+GET http://localhost:8181/stocks
+Accept: application/json
+Content-Type: application/json
+
+### get customers with parameter
+GET http://localhost:8282/stocks?name=t
+Accept: application/json
+Content-Type: application/json
+
+### getOne customers
+GET http://localhost:8282/stocks
+Accept: application/json
+Content-Type: application/json
+
+### update customers
+PUT http://localhost:8282/stocks/1
+Content-Type: application/json
+
+{
+  "name": "test",
+  "code": "1234",
+  "price": 2000
+}
+
+### delete customers
+DELETE http://localhost:8282/stocks

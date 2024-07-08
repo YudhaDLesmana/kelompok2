@@ -1,9 +1,9 @@
 package com.enigma.kelompok.controller;
 
-import com.enigma.kelompok.model.Portofolio;
+import com.enigma.kelompok.model.Portfolio;
 import com.enigma.kelompok.service.PortDetailService;
-import com.enigma.kelompok.service.PortofolioService;
-import com.enigma.kelompok.utils.DTO.PortDetailDTO;
+import com.enigma.kelompok.service.PortfolioService;
+import com.enigma.kelompok.utils.dto.PortDetailDTO;
 import com.enigma.kelompok.utils.response.PageWrapper;
 import com.enigma.kelompok.utils.response.Res;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/portofolio")
 @RequiredArgsConstructor
 public class PortofolioController {
-    private final PortofolioService portofolioService;
+    private final PortfolioService portofolioService;
     private final PortDetailService portDetail;
 
     @PostMapping("/buy")
@@ -29,28 +29,28 @@ public class PortofolioController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody Portofolio req){
+    public ResponseEntity<?> create(@RequestBody PortDetailDTO req){
         return Res.renderJson(
-                portofolioService.create(req),"Create",HttpStatus.CREATED
+                portofolioService.create(req.getPortfolio_id(),req),"Create",HttpStatus.CREATED
         );
     }
 
     @GetMapping("/{id}")
-    public Portofolio getOne(@PathVariable Integer id){
+    public Portfolio getOne(@PathVariable Integer id){
         return portofolioService.getOne(id);
     }
 
     public ResponseEntity<?> getAll(@RequestParam (required = false)Integer totalAmount,
                                     @PageableDefault(page = 0,size = 10)Pageable pageable){
-        Page<Portofolio> res = portofolioService.getAll(totalAmount,pageable);
-        PageWrapper<Portofolio> result = new PageWrapper<>(res);
+        Page<Portfolio> res = portofolioService.getAll(pageable);
+        PageWrapper<Portfolio> result = new PageWrapper<>(res);
         return Res.renderJson(
                 result,"found",HttpStatus.OK
         );
     }
 
     @PutMapping("/{id}")
-    public Portofolio update(@PathVariable Integer id,@RequestBody Portofolio req){
+    public Portfolio update(@PathVariable Integer id,@RequestBody PortDetailDTO req){
         return portofolioService.update(id, req);
     }
 
