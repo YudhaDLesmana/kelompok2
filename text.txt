@@ -13,3 +13,5 @@ ROLE USER
 ROLE ADMIN => bisa akses semua feature
 
 AuthController sudah dibuat service dan serviceImpl nya jadi di controller hanya memangil service nya saja
+semua controller sudah implementasi ResponseEntity
+
