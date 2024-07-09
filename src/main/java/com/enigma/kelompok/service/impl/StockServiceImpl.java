@@ -26,7 +26,7 @@ public class StockServiceImpl implements StockService {
     public StockServiceImpl(StockRepository stockRepository) {
         this.stockRepository = stockRepository;
         this.restClient = RestClient.builder()
-                .baseUrl("https://www.alphavantage.co/query?symbol=IBM&function=TIME_SERIES_MONTHLY&apikey=CXNO9L2WP2FDTXJN")
+                .baseUrl("https://www.alphavantage.co/query?symbol=IBM&function=TIME_SERIES_MONTHLY&apikey=")
                 .build();;
     }
 
