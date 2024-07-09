@@ -1,5 +1,6 @@
 package com.enigma.kelompok.model;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,5 +23,6 @@ public class Stock {
   private Integer id;
   private String name;
   private String code;
+  @Nullable
   private Integer price;
 }
